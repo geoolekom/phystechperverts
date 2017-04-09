@@ -3,7 +3,7 @@
 {% block title %} Загруженные картинки {% endblock %}
 
 {% block content %}
-    <div align="center">
+    <div>
     {% for filename in filenames %}
         {% url 'core:download' filename=filename as file_url%}
         <a href="{{ file_url }}"
@@ -13,6 +13,10 @@
         >
             <img src="{{ file_url }}" style="max-height: 200px; padding: 10px; margin: 3px;" class="img-thumbnail">
         </a>
+    {% empty %}
+        <h3>
+            Пока нет ни одной фотографии. Пора это <a href="{% url 'core:upload' %}">исправить</a>!
+        </h3>
     {% endfor %}
     </div>
 
