@@ -1,0 +1,45 @@
+{% load bootstrap3 %}
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>
+        {% block title %}{% endblock %}
+    </title>
+
+    <script src="{% bootstrap_jquery_url %}"></script>
+    {% bootstrap_css %}
+    {% bootstrap_javascript %}
+    <script src="{% static 'core/dropzone.js' %}"></script>
+
+    <link href="{% static 'core/dropzone.css' %}" type="text/css" rel="stylesheet"/>
+
+</head>
+
+<body>
+    {% url 'core:home' as home %}
+    {% url 'core:pictures' as pictures %}
+    {% url 'core:upload' as upload %}
+
+    <nav class="navbar navbar-default">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="{{ home }}">
+                    <img src="{% static 'core/logo.png' %}" height="100%;">
+                </a>
+            </div>
+            <ul class="nav navbar-nav">
+                <li class="{% if request.path == pictures %}active{% endif %}"><a href="{{ pictures }}">Загруженные</a></li>
+                <li class="{% if request.path == upload %}active{% endif %}"><a href="{{ upload }}">Загрузить свою!</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container">
+        {% block content %} {% endblock %}
+    </div>
+</body>
+
+</html>

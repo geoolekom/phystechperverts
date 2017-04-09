@@ -1,0 +1,24 @@
+{% extends 'core/base.html' %}
+{% load bootstrap3 %}
+
+{% block title %} Загрузи картинку анонимно {% endblock %}
+
+{% block content %}
+
+    <script>
+        Dropzone.autoDiscover = false;
+        $(document).ready(function () {
+            $('#picture-upload-form').dropzone({
+                paramName: 'picture',
+                maxFilesize: 10,
+                url: "{% url 'core:upload' %}",
+                acceptedFiles: 'image/*',
+                dictDefaultMessage: 'Перетащите картинки сюда'
+            });
+        });
+    </script>
+
+    <form method="post" enctype="multipart/form-data" id="picture-upload-form" class="dropzone">
+        {% csrf_token %}
+    </form>
+{% endblock %}

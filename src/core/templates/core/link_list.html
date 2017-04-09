@@ -1,0 +1,23 @@
+{% extends 'core/base.html' %}
+
+{% block title %} Загруженные картинки {% endblock %}
+
+{% block content %}
+    <div align="center">
+    {% for filename in filenames %}
+        {% url 'core:download' filename=filename as file_url%}
+        <a href="{{ file_url }}"
+           data-toogle="tooltip"
+           title="Открыть полностью"
+           class="show-tooltip"
+        >
+            <img src="{{ file_url }}" style="max-height: 200px; padding: 10px; margin: 3px;" class="img-thumbnail">
+        </a>
+    {% endfor %}
+    </div>
+
+    <script>
+        $('[data-toggle="tooltip"]').tooltip();
+    </script>
+
+{% endblock %}
