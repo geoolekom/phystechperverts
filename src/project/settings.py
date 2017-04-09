@@ -13,10 +13,10 @@ https://docs.djangoproject.com/en/1.11/ref/settings/
 import os
 from configparser import ConfigParser
 config = ConfigParser()
-config.read('../local.conf')
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+config.read(os.path.join(BASE_DIR, 'local.conf'))
 
 
 # Quick-start development settings - unsuitable for production
@@ -28,7 +28,7 @@ SECRET_KEY = config.get('security', 'SECRET')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['localhost']
+ALLOWED_HOSTS = ['localhost', 'physechperverts.pythonanywhere.com']
 
 
 # Application definition
@@ -111,6 +111,6 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
 
 STATIC_URL = '/static/'
-STATIC_ROOT = '/home/geoolekom/code/python/anonpics/static/'
-UPLOAD_TO = '/home/geoolekom/code/python/anonpics/uploads/'
+STATIC_ROOT = os.path.join(BASE_DIR, '../static/')
+UPLOAD_TO = os.path.join(BASE_DIR, '../uploads/')
 UPLOAD_URL = '/uploads/'
